@@ -13,17 +13,15 @@ router.get("/", async (req, res, next) => {
 });
 
 router.post("/", async (req, res, next) => {
-    const buf = Buffer.from(req.body);
-    const body = JSON.parse(buf.toString());
-
-    const existingScore = await scores.findOne({ player: body.player });
+    const existingScore = await scores.findOne({ player: req.body.player });
     if (existingScore) {
         const error = new Error(`${existingScore.player} already exists`);
         res.status(409);
         next(error);
     } else {
         const newScore = await scores.insert({
-            player: body.player,
+            player: req.body.player,
+            score: 0,
             updated: new Date()
         });
         res.status(201);
