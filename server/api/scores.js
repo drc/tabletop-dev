@@ -2,6 +2,8 @@ const e = require('express');
 const express = require('express');
 const db = require("../db/connection");
 const scores = db.get("scores");
+const axios = require("axios");
+require("dotenv").config();
 
 const router = express.Router();
 
@@ -41,6 +43,10 @@ router.put("/:player", async (req, res, next) => {
     const { player } = req.params;
     const buf = Buffer.from(req.body);
     const body = JSON.parse(buf.toString());
+
+    const response = await axios(`https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${process.env.STEAM_KEY}&steamids=${body.steam_id}`);
+    body.picture = response.data.response.players[0].avatarfull;
+
     if (Object.keys(body).length === 0) {
         const error = new Error(`cant update ${player} without some data`);
         res.status(400);
@@ -49,6 +55,5 @@ router.put("/:player", async (req, res, next) => {
     const updatedPlayer = await scores.findOneAndUpdate({ player }, { $set: { ...body, updated: new Date() } });
     res.json(updatedPlayer);
 });
-
 
 module.exports = router;
