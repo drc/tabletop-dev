@@ -1,4 +1,8 @@
 .App {
   display: flex;
   justify-content: space-evenly;
+  flex-wrap: wrap;
+  width: 80%;
+  margin: 0 auto;
+  gap: 16px;
 }
