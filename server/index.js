@@ -20,13 +20,12 @@ app.use(express.json());
 const scores = require("./api/scores");
 app.use("/api/scores", scores);
 
-if(process.env.NODE_ENV === "production") {
+// if(process.env.NODE_ENV === "production") {
     // static folder
-    console.log(path.join(__dirname, "..", "/client/build"));
-    app.use(express.static(path.join(__dirname, "..", "/client/build")));
+    app.use(express.static(path.join(__dirname, "/client/index.html")));
     
-    app.get(/.*/, (req,res) => res.sendFile(path.join(__dirname, "..", "/client/build/index.html")));
-}
+    app.get(/.*/, (req,res) => res.sendFile(path.join(__dirname, "/client/index.html")));
+// }
 
 
 // error handling stuff
