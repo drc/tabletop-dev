@@ -3,6 +3,7 @@ const morgan = require("morgan");
 const helmet = require("helmet");
 const cors = require("cors");
 const path = require("path");
+const bodyParser = require("body-parser");
 
 const app = express();
 
@@ -13,7 +14,11 @@ app.use(helmet({
     contentSecurityPolicy: false,
 }));
 app.use(cors());
-app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.raw());
 
 // custom endpoint stuff
 

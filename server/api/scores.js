@@ -39,12 +39,14 @@ router.get("/:player", async (req, res, next) => {
 
 router.put("/:player", async (req, res, next) => {
     const { player } = req.params;
-    if (Object.keys(req.body).length === 0) {
+    const buf = Buffer.from(req.body);
+    const body = JSON.parse(buf.toString());
+    if (Object.keys(body).length === 0) {
         const error = new Error(`cant update ${player} without some data`);
         res.status(400);
         next(error);
     }
-    const updatedPlayer = await scores.findOneAndUpdate({ player }, { $set: { ...req.body, updated: new Date() } });
+    const updatedPlayer = await scores.findOneAndUpdate({ player }, { $set: { ...body, updated: new Date() } });
     res.json(updatedPlayer);
 });
 
