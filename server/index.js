@@ -11,7 +11,7 @@ const app = express();
 app.use(morgan("dev"));
 app.use(helmet({
     contentSecurityPolicy: false,
-  }));
+}));
 app.use(cors());
 app.use(express.json());
 
@@ -20,12 +20,12 @@ app.use(express.json());
 const scores = require("./api/scores");
 app.use("/api/scores", scores);
 
-// if(process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === "production") {
     // static folder
-    app.use(express.static(path.join(__dirname, "/client/")));
-    
-    app.get(/.*/, (req,res) => res.sendFile(path.join(__dirname, "/client/index.html")));
-// }
+    app.use(express.static(path.join(__dirname, "..", "/client/build/")));
+
+    app.get(/.*/, (req, res) => res.sendFile(path.join(__dirname, "..", "/client/build/index.html")));
+}
 
 
 // error handling stuff
