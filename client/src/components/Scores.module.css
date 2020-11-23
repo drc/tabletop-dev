@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 1rem;
+  gap: 1rem;
+}
+
+.loading {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+@media (prefers-color-scheme: dark) {
+  .loading {
+    color: white;
+  }
+}

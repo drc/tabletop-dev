@@ -1,0 +1,25 @@
+.navbar {
+  margin: 10px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.link {
+  /* padding: 1.5rem; */
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+@media (prefers-color-scheme: dark) {
+  .link {
+    color: hsl(240, 100%, 75%);
+  }
+
+  .link:active {
+    color: hsl(0, 100%, 75%);
+  }
+
+  .link:visited {
+    color: hsl(271, 68%, 75%);
+  }
+}

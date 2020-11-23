@@ -4,11 +4,23 @@ const helmet = require("helmet");
 const cors = require("cors");
 const path = require("path");
 const bodyParser = require("body-parser");
+const slowDown = require("express-slow-down");
 
 const app = express();
 
+// Rate Limiting
+app.enable("trust proxy");
+
+const speedLimiter = slowDown({
+    windowMs: 5 * 60 * 1000,
+    delayAfter: 10,
+    delayMs: 500,
+    maxDelayMs: 10000
+});
+
 // Middleware
 
+app.use(speedLimiter);
 app.use(morgan("dev"));
 app.use(helmet({
     contentSecurityPolicy: false,
@@ -31,7 +43,6 @@ if (process.env.NODE_ENV === "production") {
 
     app.get(/.*/, (req, res) => res.sendFile(path.join(__dirname, "..", "/client/build/index.html")));
 }
-
 
 // error handling stuff
 app.use((req, res, next) => {

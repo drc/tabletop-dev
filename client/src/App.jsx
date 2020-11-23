@@ -1,27 +1,37 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useParams,
+} from "react-router-dom";
 
-import PlayerCard from "./components/PlayerCard"
+import Scores from "./components/Scores";
+import Home from "./components/Home";
+import Navigation from "./components/Navigation";
 
 function App() {
-
-  const [players, setPlayers] = useState([]);
-
-  useEffect(() => {
-    async function getData() {
-      const { data } = await axios("/api/scores");
-      setPlayers(data.results);
-    }
-
-    getData();
-  }, []);
-
   return (
-    <div className="App">
-      {players.map(p => <PlayerCard key={p._id} {...p} />)}
-    </div>
+    <Router>
+      <Navigation />
+
+      <Switch>
+        <Route exact path="/scores">
+          <Scores />
+        </Route>
+        <Route path={`/scores/:player`}>
+          <Player />
+        </Route>
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
+
+const Player = () => {
+  let { player } = useParams();
+  return <div>{player}</div>;
+};
 
 export default App;

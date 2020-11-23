@@ -1,4 +1,4 @@
-import "./PlayerCard.css";
+import style from "./PlayerCard.module.css";
 
 const PlayerCard = ({ player, score, updated, color, picture }) => {
   const updatedString = new Intl.DateTimeFormat("en", {
@@ -7,15 +7,15 @@ const PlayerCard = ({ player, score, updated, color, picture }) => {
   }).format(new Date(updated));
 
   return (
-    <div className="card">
-      <div className="container">
+    <div className={style.card}>
+      <div className={style.container}>
         <img
-          className="profilePic"
+          className={style.profilePic}
           src={picture || "https://picsum.photos/200"}
           alt={player}
         ></img>
         <h2
-          className={`name ${color === "White" ? "white" : ""}`}
+          className={`${style.name} ${color === "White" ? style.white : ""}`}
           style={{
             color,
           }}
@@ -23,10 +23,10 @@ const PlayerCard = ({ player, score, updated, color, picture }) => {
           {player}
         </h2>
         <div>
-          <div className={`score ${score < 0 ? "negative" : ""}`}>
+          <div className={`${style.score} ${score < 0 ? style.negative : ""}`}>
             {Math.abs(score).toFixed(2)}
           </div>
-          <div className="updated">Last Updated: {updatedString}</div>
+          <div className={style.updated}>Last Updated: {updatedString}</div>
         </div>
       </div>
     </div>
