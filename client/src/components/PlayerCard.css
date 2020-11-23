@@ -39,7 +39,28 @@
   content: "$";
 }
 
-@media only screen and (min-device-width: 414px) and (max-device-width: 896px) {
+@media (max-width: 768px) {
+  .card {
+    width: 100%;
+  }
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .profilePic {
+    width: 25%;
+  }
+
+  .updated {
+    display: none;
+  }
+
+  .score {
+      font-size: 1.6rem;
+  }
 }
 
 @media (prefers-color-scheme: dark) {

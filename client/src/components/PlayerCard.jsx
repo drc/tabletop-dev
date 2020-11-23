@@ -1,13 +1,4 @@
-import styled from "styled-components";
 import "./PlayerCard.css";
-
-const Score = styled.div`
-  color: ${({ t }) => (t >= 0 ? "inherit" : "red")};
-
-  &::before {
-    content: "${({ t }) => (t >= 0 ? "$" : "-$")}";
-  }
-`;
 
 const PlayerCard = ({ player, score, updated, color, picture }) => {
   const updatedString = new Intl.DateTimeFormat("en", {
@@ -35,7 +26,7 @@ const PlayerCard = ({ player, score, updated, color, picture }) => {
           <div className={`score ${score < 0 ? "negative" : ""}`}>
             {Math.abs(score).toFixed(2)}
           </div>
-          <div>Last Updated: {updatedString}</div>
+          <div className="updated">Last Updated: {updatedString}</div>
         </div>
       </div>
     </div>
