@@ -39,7 +39,7 @@ const Home = () => {
   return (
     <div className={style.container}>
       <div>dabledop bohkur</div>
-      {/* <pre>{pick[Math.floor(Math.random() * pick.length)]}</pre> */}
+      {console.log(pick[Math.floor(Math.random() * pick.length)])}
     </div>
   );
 };

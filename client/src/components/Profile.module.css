@@ -1,0 +1,39 @@
+.card {
+  width: var(--width);
+  /* height: 85vh; */
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 13%);
+  border-radius: 2rem;
+}
+
+.container {
+  /* border: 1px solid blue; */
+  display: flex;
+  justify-content: space-around;
+  padding: 2.5rem;
+}
+
+.playerName {
+  font-size: 2rem;
+  font-weight: 700;
+  font-family: "Arial Black";
+}
+
+.info {
+  /* border: 1px solid blue; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.label {
+  font-weight: 600;
+}
+
+.label::after {
+  content: ": ";
+}
+
+.input {
+  display: block;
+}

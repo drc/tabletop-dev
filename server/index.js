@@ -5,6 +5,8 @@ const cors = require("cors");
 const path = require("path");
 const bodyParser = require("body-parser");
 const slowDown = require("express-slow-down");
+const passport = require("passport");
+const session = require("express-session");
 
 const app = express();
 
@@ -16,6 +18,14 @@ const speedLimiter = slowDown({
     delayAfter: 10,
     delayMs: 500,
     maxDelayMs: 10000
+});
+
+passport.serializeUser(function (user, done) {
+    done(null, user);
+});
+
+passport.deserializeUser(function (obj, done) {
+    done(null, obj);
 });
 
 // Middleware
@@ -31,11 +41,19 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.raw());
+app.use(
+    session({ secret: "dabledop", resave: true, saveUninitialized: true })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
 // custom endpoint stuff
 
 const scores = require("./api/scores");
 app.use("/api/scores", scores);
+
+const auth = require("./api/auth");
+app.use("/api/auth", auth);
 
 if (process.env.NODE_ENV === "production") {
     // static folder

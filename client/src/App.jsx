@@ -1,13 +1,9 @@
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useParams,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import Scores from "./components/Scores";
 import Home from "./components/Home";
+import Scores from "./components/Scores";
 import Navigation from "./components/Navigation";
+import Player from "./components/Player";
 
 function App() {
   return (
@@ -15,23 +11,12 @@ function App() {
       <Navigation />
 
       <Switch>
-        <Route exact path="/scores">
-          <Scores />
-        </Route>
-        <Route path={`/scores/:player`}>
-          <Player />
-        </Route>
-        <Route path="/">
-          <Home />
-        </Route>
+        <Route exact path="/scores" component={Scores} />
+        <Route path={`/scores/:player`} component={Player} />
+        <Route path="/" component={Home} />
       </Switch>
     </Router>
   );
 }
-
-const Player = () => {
-  let { player } = useParams();
-  return <div>{player}</div>;
-};
 
 export default App;

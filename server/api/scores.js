@@ -1,8 +1,8 @@
-const e = require('express');
 const express = require('express');
 const db = require("../db/connection");
 const scores = db.get("scores");
 const axios = require("axios");
+const passport = require("passport");
 require("dotenv").config();
 
 const router = express.Router();

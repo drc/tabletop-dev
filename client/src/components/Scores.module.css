@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  width: 80%;
+  width: var(--width);
   margin: 0 auto;
   margin-top: 1rem;
   gap: 1rem;

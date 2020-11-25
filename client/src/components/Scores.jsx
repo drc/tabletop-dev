@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+import Loading from "./Loading";
 import PlayerCard from "./PlayerCard";
 import style from "./Scores.module.css";
 
@@ -18,7 +19,7 @@ const Scores = () => {
 
   return (
     <div className={style.container}>
-      {players.length === 0 && <div className={style.loading}>Loading...</div>}
+      {players.length === 0 && <Loading/>}
       {players.map((p) => (
         <PlayerCard key={p._id} {...p} />
       ))}

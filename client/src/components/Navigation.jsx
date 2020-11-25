@@ -13,7 +13,6 @@ const routes = [
 ];
 
 const Navigation = () => {
-  console.log(style);
   return (
     <nav className={style.navbar}>
       {routes.map((r,idx) => (
