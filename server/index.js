@@ -7,6 +7,8 @@ const bodyParser = require("body-parser");
 const slowDown = require("express-slow-down");
 const passport = require("passport");
 const session = require("express-session");
+const { ApolloServer, gql } = require("apollo-server-express");
+const { typeDefs, resolvers } = require("./schema");
 
 const app = express();
 
@@ -47,6 +49,14 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+const server = new ApolloServer({
+    typeDefs,
+    resolvers
+});
+
+server.applyMiddleware({ app });
+
+
 // custom endpoint stuff
 
 const scores = require("./api/scores");
@@ -80,6 +90,7 @@ app.use((err, req, res, next) => {
 
 // server stuff
 
+
 const port = process.env.PORT || 5000;
 
-app.listen(port, () => console.log(`Server started at http://localhost:${port}`));
+app.listen(port, () => console.log(`Server started at http://localhost:${port}${server.graphqlPath}`));
