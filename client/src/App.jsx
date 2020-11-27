@@ -7,13 +7,19 @@ import Navigation from "./components/Navigation";
 import Player from "./components/Player";
 
 const client = new ApolloClient({
-  uri: process.env.NODE_ENV === "production" ? process.env.APOLLO_CLIENT_URI : "http://localhost:5000/graphql",
+  uri:
+    process.env.NODE_ENV === "production"
+      ? process.env.APOLLO_CLIENT_URI
+      : "http://localhost:5000/graphql",
+  connectToDevtools: true,
   cache: new InMemoryCache({
     typePolicies: {
       Scores: { keyFields: ["_id"] },
     },
   }),
 });
+
+console.log(process.env.NODE_ENV);
 
 function App() {
   return (

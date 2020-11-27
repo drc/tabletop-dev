@@ -54,7 +54,7 @@ const server = new ApolloServer({
     resolvers
 });
 
-server.applyMiddleware({ app });
+server.applyMiddleware({ app, path: "/graphql" });
 
 
 // custom endpoint stuff
