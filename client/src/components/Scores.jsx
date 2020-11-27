@@ -1,26 +1,37 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { gql, useQuery } from "@apollo/client";
 
 import Loading from "./Loading";
 import PlayerCard from "./PlayerCard";
 import style from "./Scores.module.css";
 
-const Scores = () => {
-  const [players, setPlayers] = useState([]);
-
-  useEffect(() => {
-    async function getData() {
-      const { data } = await axios("/api/scores");
-      setPlayers(data.results);
+const GET_SCORES = gql`
+  query GetScores {
+    scores {
+      _id
+      player
+      score
+      updated
+      color
+      picture
     }
+  }
+`;
 
-    getData();
-  }, []);
+const Scores = () => {
+  const { loading, error, data } = useQuery(GET_SCORES);
 
+  if (loading)
+    return (
+      <div className={style.container}>
+        <Loading />
+      </div>
+    );
+
+  if (error) return `Error! ${error.message}`;
+  
   return (
     <div className={style.container}>
-      {players.length === 0 && <Loading/>}
-      {players.map((p) => (
+      {data.scores.map((p) => (
         <PlayerCard key={p._id} {...p} />
       ))}
     </div>

@@ -1,81 +1,88 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
+import { gql, useQuery, makeVar } from "@apollo/client";
+
 import style from "./Profile.module.css";
 import Loading from "./Loading";
 
-const Profile = ({ player }) => {
-  
-  const [profile, setProfile] = useState();
-
-  const handleColorChange = ({ target }) => {
-    setProfile({ ...profile, color: target.value });
-  };
-
-  useEffect(() => {
-    async function getData() {
-      const { data } = await axios(`/api/scores/${player}`);
-      const updatedStr = new Intl.DateTimeFormat("en", {
-        timeStyle: "short",
-        dateStyle: "short",
-      }).format(new Date(data.updated));
-
-      setProfile({ ...data, updatedStr });
+const GET_PROFILE = gql`
+  query GetProfile($player: String!) {
+    score(player: $player) {
+      player
+      picture
+      color
+      score
+      updated
     }
-    getData();
-  }, [player]);
+  }
+`;
+
+const Profile = ({ player }) => {
+  const { loading, error, data } = useQuery(GET_PROFILE, {
+    variables: { player },
+  });
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return `Error!!! ${error.message}`;
+  }
+
+  const colorVar = makeVar("#000000");
+
+  const updatedStr = new Intl.DateTimeFormat("en", {
+    timeStyle: "short",
+    dateStyle: "short",
+  }).format(new Date(data.score.updated));
 
   return (
-    <>
-      {!profile && <Loading />}
-      {profile && (
-        <div className={style.card}>
-          <div className={style.container}>
-            <div className={style.imageContainer}>
-              <img
-                src={profile.picture || "https://picsum.photos/200"}
-                alt={profile.player}
-              />
-            </div>
-            <div className={style.info}>
-              <div
-                className={style.playerName}
-                style={{ color: profile.color }}
-              >
-                {profile.player}
-              </div>
-              <div>
-                <label className={style.label} htmlFor="score">
-                  Score
-                </label>
-                <input
-                  className={style.input}
-                  type="number"
-                  value={profile.score}
-                  readOnly
-                />
-              </div>
-              <div>
-                <label className={style.label} htmlFor="color">
-                  Last Color Played as
-                </label>
-                <input
-                  className={style.input}
-                  type="color"
-                  value={profile.color}
-                  onChange={handleColorChange}
-                />
-              </div>
-              <div>
-                <label className={style.label} htmlFor="updated">
-                  Last Updated
-                </label>
-                {profile.updatedStr}
-              </div>
-            </div>
+    <div className={style.card}>
+      <div className={style.container}>
+        <div className={style.imageContainer}>
+          <img
+            src={data.score.picture || "https://picsum.photos/200"}
+            alt={data.score.player}
+          />
+        </div>
+        <div className={style.info}>
+          <div className={style.playerName} style={{ color: colorVar() }}>
+            {data.score.player}
+          </div>
+          <div>
+            <label className={style.label} htmlFor="score">
+              Score
+            </label>
+            <input
+              className={style.input}
+              type="number"
+              value={data.score.score}
+              readOnly
+            />
+          </div>
+          <div>
+            <label className={style.label} htmlFor="color">
+              Last Color Played as
+            </label>
+            <input
+              className={style.input}
+              type="color"
+              value={colorVar()}
+              onChange={(e) => {
+                console.log("changing");
+                colorVar(e.target.value)
+                console.log(colorVar())
+              }}
+            />
+          </div>
+          <div>
+            <label className={style.label} htmlFor="updated">
+              Last Updated
+            </label>
+            {updatedStr}
           </div>
         </div>
-      )}
-    </>
+      </div>
+    </div>
   );
 };
 

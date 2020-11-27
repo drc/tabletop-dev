@@ -2,10 +2,12 @@ import { Link, useRouteMatch } from "react-router-dom";
 import style from "./PlayerCard.module.css";
 
 const PlayerCard = ({ player, score, updated, color, picture }) => {
-  const updatedString = new Intl.DateTimeFormat("en", {
-    timeStyle: "short",
-    dateStyle: "short",
-  }).format(new Date(updated));
+  
+    const updatedString = new Intl.DateTimeFormat("en", {
+      timeStyle: "short",
+      dateStyle: "short",
+    }).format(new Date(updated));
+  
 
   const { path } = useRouteMatch();
 

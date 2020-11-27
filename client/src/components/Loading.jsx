@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import style from "./Loading.module.css";
 
-export default () => {
+const Loading = () => {
   const [rainbow, setRainbow] = useState(["🌑"]);
-  const moons = ["🌑", "🌒", "🌓", "🌔", "🌕", "🌖", "🌗", "🌘"];
-
+  
   useEffect(() => {
+    const moons = ["🌑", "🌒", "🌓", "🌔", "🌕", "🌖", "🌗", "🌘"];
     let moonCount = 0;
     let random = setInterval(() => {
       setRainbow(moons[moonCount % moons.length]);
@@ -16,3 +16,5 @@ export default () => {
 
   return <div className={style.loading}>{rainbow}</div>;
 };
+
+export default Loading;

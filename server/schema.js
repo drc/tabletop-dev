@@ -4,11 +4,12 @@ const scores = db.get("scores");
 const axios = require("axios");
 
 const typeDefs = gql`
+    scalar Date
 
     type Score {
         _id: ID!
         player: String
-        updated: String
+        updated: Date
         score: Float
         color: String
         steam_id: String
