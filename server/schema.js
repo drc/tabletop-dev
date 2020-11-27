@@ -54,8 +54,8 @@ const resolvers = {
         },
         updatePlayer: async (_, param) => {
             const { player, info: body } = param;
-            
-            if (body?.steam_id) {
+
+            if (body.steam_id) {
                 const response = await axios(`https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${process.env.STEAM_KEY}&steamids=${body.steam_id}`);
                 body.picture = response.data.response.players[0].avatarfull;
             }
