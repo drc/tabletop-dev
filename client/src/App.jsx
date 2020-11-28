@@ -9,7 +9,7 @@ import Player from "./components/Player";
 const client = new ApolloClient({
   uri:
     process.env.NODE_ENV === "production"
-      ? process.env.APOLLO_CLIENT_URI
+      ? "https://dabledop.herokuapp.com/graphql"
       : "http://localhost:5000/graphql",
   connectToDevtools: true,
   cache: new InMemoryCache({
