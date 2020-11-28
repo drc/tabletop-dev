@@ -6,7 +6,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   --width: 80%;
-  --dark: #121212;
+  --darker: #1e1f30;
+  --darkest: #121324;
 }
 
 code {
@@ -16,6 +17,6 @@ code {
 
 @media (prefers-color-scheme: dark) {
   body {
-    background-color: var(--dark);
+    background-color: var(--darkest);
   }
 }

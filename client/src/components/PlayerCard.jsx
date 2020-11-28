@@ -1,5 +1,6 @@
 import { Link, useRouteMatch } from "react-router-dom";
 import style from "./PlayerCard.module.css";
+import colorList from "../utils/colors";
 
 const PlayerCard = ({ player, score, updated, color, picture }) => {
   
@@ -23,7 +24,7 @@ const PlayerCard = ({ player, score, updated, color, picture }) => {
           <h2
             className={`${style.name} ${color === "White" ? style.white : ""}`}
             style={{
-              color,
+              color: colorList[color].hex,
             }}
           >
             {player}

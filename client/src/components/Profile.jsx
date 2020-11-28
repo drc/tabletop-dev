@@ -32,8 +32,6 @@ const Profile = ({ player }) => {
     return `Error!!! ${error.message}`;
   }
 
-  console.log(data);
-
   const updatedStr = new Intl.DateTimeFormat("en", {
     timeStyle: "short",
     dateStyle: "short",
