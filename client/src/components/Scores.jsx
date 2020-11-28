@@ -19,8 +19,7 @@ const GET_SCORES = gql`
 
 const Scores = () => {
   const { loading, error, data } = useQuery(GET_SCORES);
-  console.log("getting scores");
-  console.log(loading);
+
   if (loading)
     return (
       <div className={style.container}>
@@ -29,7 +28,7 @@ const Scores = () => {
     );
 
   if (error) return `Error! ${error.message}`;
-  console.log("done getting scores");
+
   return (
     <div className={style.container}>
       {data.scores.map((p) => (

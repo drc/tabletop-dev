@@ -1,10 +1,11 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
+import { ApolloProvider, ApolloClient } from "@apollo/client";
 
 import Home from "./components/Home";
 import Scores from "./components/Scores";
 import Navigation from "./components/Navigation";
 import Player from "./components/Player";
+import { cache } from "./utils/cache";
 
 const client = new ApolloClient({
   uri:
@@ -12,11 +13,7 @@ const client = new ApolloClient({
       ? "https://dabledop.herokuapp.com/graphql"
       : "http://localhost:5000/graphql",
   connectToDevtools: true,
-  cache: new InMemoryCache({
-    typePolicies: {
-      Scores: { keyFields: ["_id"] },
-    },
-  }),
+  cache,
 });
 
 console.log(process.env.NODE_ENV);

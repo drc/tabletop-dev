@@ -7,6 +7,9 @@ module.exports = {
         ],
         get rgba() {
             return `rgba(${this.rgb[0] * 255}, ${this.rgb[1] * 255}, ${this.rgb[2] * 255})`
+        },
+        get hex() {
+            return `#${Math.round(this.rgb[0] * 255).toString(16)}${Math.round(this.rgb[1] * 255).toString(16)}${Math.round(this.rgb[2] * 255).toString(16)}`;
         }
     },
     Brown: {
@@ -17,6 +20,9 @@ module.exports = {
         ],
         get rgba() {
             return `rgba(${this.rgb[0] * 255}, ${this.rgb[1] * 255}, ${this.rgb[2] * 255})`
+        },
+        get hex() {
+            return `#${Math.round(this.rgb[0] * 255).toString(16)}${Math.round(this.rgb[1] * 255).toString(16)}${Math.round(this.rgb[2] * 255).toString(16)}`;
         }
     },
     Red: {
@@ -27,6 +33,9 @@ module.exports = {
         ],
         get rgba() {
             return `rgba(${this.rgb[0] * 255}, ${this.rgb[1] * 255}, ${this.rgb[2] * 255})`
+        },
+        get hex() {
+            return `#${Math.round(this.rgb[0] * 255).toString(16)}${Math.round(this.rgb[1] * 255).toString(16)}${Math.round(this.rgb[2] * 255).toString(16)}`;
         }
     },
     Orange: {
@@ -35,6 +44,9 @@ module.exports = {
         ],
         get rgba() {
             return `rgba(${this.rgb[0] * 255}, ${this.rgb[1] * 255}, ${this.rgb[2] * 255})`
+        },
+        get hex() {
+            return `#${Math.round(this.rgb[0] * 255).toString(16)}${Math.round(this.rgb[1] * 255).toString(16)}${Math.round(this.rgb[2] * 255).toString(16)}`;
         }
     },
     Yellow: {
@@ -43,42 +55,63 @@ module.exports = {
         ],
         get rgba() {
             return `rgba(${this.rgb[0] * 255}, ${this.rgb[1] * 255}, ${this.rgb[2] * 255})`
+        },
+        get hex() {
+            return `#${Math.round(this.rgb[0] * 255).toString(16)}${Math.round(this.rgb[1] * 255).toString(16)}${Math.round(this.rgb[2] * 255).toString(16)}`;
         }
     },
     Green: {
         rgb: [0.192, 0.701, 0.168],
         get rgba() {
             return `rgba(${this.rgb[0] * 255}, ${this.rgb[1] * 255}, ${this.rgb[2] * 255})`
+        },
+        get hex() {
+            return `#${Math.round(this.rgb[0] * 255).toString(16)}${Math.round(this.rgb[1] * 255).toString(16)}${Math.round(this.rgb[2] * 255).toString(16)}`;
         }
     },
     Teal: {
         rgb: [0.129, 0.694, 0.607],
         get rgba() {
             return `rgba(${this.rgb[0] * 255}, ${this.rgb[1] * 255}, ${this.rgb[2] * 255})`
+        },
+        get hex() {
+            return `#${Math.round(this.rgb[0] * 255).toString(16)}${Math.round(this.rgb[1] * 255).toString(16)}${Math.round(this.rgb[2] * 255).toString(16)}`;
         }
     },
     Blue: {
         rgb: [0.118, 0.53, 1],
         get rgba() {
             return `rgba(${this.rgb[0] * 255}, ${this.rgb[1] * 255}, ${this.rgb[2] * 255})`
+        },
+        get hex() {
+            return `#${Math.round(this.rgb[0] * 255).toString(16)}${Math.round(this.rgb[1] * 255).toString(16)}${Math.round(this.rgb[2] * 255).toString(16)}`;
         }
     },
     Purple: {
         rgb: [0.627, 0.125, 0.941],
         get rgba() {
             return `rgba(${this.rgb[0] * 255}, ${this.rgb[1] * 255}, ${this.rgb[2] * 255})`
+        },
+        get hex() {
+            return `#${Math.round(this.rgb[0] * 255).toString(16)}${Math.round(this.rgb[1] * 255).toString(16)}${Math.round(this.rgb[2] * 255).toString(16)}`;
         }
     },
     Pink: {
         rgb: [0.96, 0.439, 0.807],
         get rgba() {
             return `rgba(${this.rgb[0] * 255}, ${this.rgb[1] * 255}, ${this.rgb[2] * 255})`
+        },
+        get hex() {
+            return `#${Math.round(this.rgb[0] * 255).toString(16)}${Math.round(this.rgb[1] * 255).toString(16)}${Math.round(this.rgb[2] * 255).toString(16)}`;
         }
     },
     Grey: {
         rgb: [0.5, 0.5, 0.5],
         get rgba() {
             return `rgba(${this.rgb[0] * 255}, ${this.rgb[1] * 255}, ${this.rgb[2] * 255})`
+        },
+        get hex() {
+            return `#${Math.round(this.rgb[0] * 255).toString(16)}${Math.round(this.rgb[1] * 255).toString(16)}${Math.round(this.rgb[2] * 255).toString(16)}`;
         }
     },
     Black: {
@@ -87,7 +120,7 @@ module.exports = {
             return `rgba(${this.rgb[0] * 255}, ${this.rgb[1] * 255}, ${this.rgb[2] * 255})`
         },
         get hex() {
-
+            return `#${Math.round(this.rgb[0] * 255).toString(16)}${Math.round(this.rgb[1] * 255).toString(16)}${Math.round(this.rgb[2] * 255).toString(16)}`;
         }
     }
 }

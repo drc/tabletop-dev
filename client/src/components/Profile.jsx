@@ -1,7 +1,10 @@
-import { gql, useQuery, makeVar } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 
 import style from "./Profile.module.css";
 import Loading from "./Loading";
+import colorList from "../utils/colors";
+
+import { colorVar } from "../utils/cache";
 
 const GET_PROFILE = gql`
   query GetProfile($player: String!) {
@@ -12,6 +15,7 @@ const GET_PROFILE = gql`
       score
       updated
     }
+    localColor @client
   }
 `;
 
@@ -28,7 +32,7 @@ const Profile = ({ player }) => {
     return `Error!!! ${error.message}`;
   }
 
-  const colorVar = makeVar("#000000");
+  console.log(data);
 
   const updatedStr = new Intl.DateTimeFormat("en", {
     timeStyle: "short",
@@ -40,12 +44,16 @@ const Profile = ({ player }) => {
       <div className={style.container}>
         <div className={style.imageContainer}>
           <img
+            className={style.profilePic}
             src={data.score.picture || "https://picsum.photos/200"}
             alt={data.score.player}
           />
         </div>
         <div className={style.info}>
-          <div className={style.playerName} style={{ color: colorVar() }}>
+          <div
+            className={style.playerName}
+            style={{ color: colorList[data.localColor].hex }}
+          >
             {data.score.player}
           </div>
           <div>
@@ -63,16 +71,19 @@ const Profile = ({ player }) => {
             <label className={style.label} htmlFor="color">
               Last Color Played as
             </label>
-            <input
+            <select
               className={style.input}
-              type="color"
               value={colorVar()}
-              onChange={(e) => {
-                console.log("changing");
-                colorVar(e.target.value)
-                console.log(colorVar())
+              onChange={({ target: { value } }) => {
+                colorVar(value);
               }}
-            />
+            >
+              {Object.keys(colorList).map((color) => (
+                <option key={color} value={color}>
+                  {color}
+                </option>
+              ))}
+            </select>
           </div>
           <div>
             <label className={style.label} htmlFor="updated">
