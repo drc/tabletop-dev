@@ -41,9 +41,10 @@ router.get("/:player", async (req, res, next) => {
 
 router.put("/:player", async (req, res, next) => {
     const { player } = req.params;
-    const buf = Buffer.from(JSON.stringify(req.body));
+    
+    const buf = Buffer.from(req.body);
     const body = JSON.parse(buf.toString());
-
+    console.log(body);
     if (body.steam_id) {
         const response = await axios(`https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${process.env.STEAM_KEY}&steamids=${body.steam_id}`);
         body.picture = response.data.response.players[0].avatarfull;
